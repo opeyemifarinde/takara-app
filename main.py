@@ -1,5 +1,7 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastaapi.middleware.cors import CORSMiddleware
+
+
 
 app = FastAPI(title="TÀKÀRÀ API", version="0.1.0")
 
@@ -16,4 +18,10 @@ app.add_middleware(
 async def read_root():
     return {"message": "Welcome to TÀKÀRÀ API"}
 
-# TODO: Add routers for users, stories, bookmarks, follows, admin, etc.
+# TODO: Add routers for users, s
+
+from app.database import Base, engine
+from app.routers import api_router
+
+Base.metadata.create_all(bind=engine)
+app.include_router(api_router)
